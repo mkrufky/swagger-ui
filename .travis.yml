@@ -27,10 +27,11 @@ script:
   - rm -rf dist
   - git clone --quiet -b gh-pages "https://${GH_TOKEN}@${GH_REF}" gh > /dev/null 2>&1
   - gulp
-  - cp -a dist/* gh/
+  - mkdir -p gh/${TRAVIS_BRANCH}
+  - cp -a dist/* gh/${TRAVIS_BRANCH}/
   - cd gh
   - git config user.name "Michael Ira Krufky via Travis CI"
   - git config user.email "mkrufky@linuxtv.org"
-  - git add .
-  - git commit -m "Deploy to GitHub Pages based on ${TRAVIS_COMMIT}"
+  - git add ${TRAVIS_BRANCH}
+  - git commit -m "Deploy to GitHub Pages based on ${TRAVIS_COMMIT} on branch ${TRAVIS_BRANCH}"
   - git push --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>&1
