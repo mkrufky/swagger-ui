@@ -1,3 +1,18 @@
+branches:
+  except:
+    - css
+    - fonts
+    - images
+    - lang
+    - lib
+    - index.html
+    - o2c.html
+    - swagger-ui.js
+    - swagger-ui.min.js
+env:
+  global:
+  - GH_REF: github.com/mkrufky/swagger-ui.git
+  - secure: "CKWO/lNfim06/wsK/fldNb28VzhbDzlD6QE95qsrH0fMA47RjEklfzCS1OiDyZyN4VIkbnpzBNHfwNk9k+8h/SyVAH3/X3ZoMRysN/LNFDTxPH84gaY5iT0uDGRXBC6l8eGuJ/3w0kwTOPrcGiRSdXZ/pVh3PIr2ckqp9jDRdqfz4+3JLv7q+jd4sB76GcK5/xY5r5lrVYE3h2sR14054QjfJv1gLitmwbWlE8TOYneg/U6YAY+dat0eyWeHBvyy9KIl2zEUxldIuNCVFfZLwnx1TCK5O4WGLfG+eRgK6TMLXWhLFIeS3P4UBgf//u+Stwne4sdEAvkd55gIgX6MChoIMl59vYhLqCbFeLE/GIMe87MgQUyQoYpPDVSk2YO6qjIcrOkguZ0KxRmTPHv2XWyI22gUEWQ57XQBFdvCHLue84Sb0BFuEtIh1nZ37UdpIFZFbCF22KTFyMHhGVF8UoShc0wm9cA24Fl4N9a7/leVTQ5AoowQBKJGDQtiVWd/2WYKtlGFe7JnBk9VP6tyVai7IuoVBFGOqtE274MA4BY/taydRp+soPaMwm+SbXcBMZOGHH/B3Wq8KFUFk+n7VWZ1H0bW+zmHIJeR8Np22IgpYi6yjfeZfgPEaNcVWmOgiCSLJpe+MCpFwJfl/Xj7is5KQRBELRjTbbM2+akYXjs="
 sudo: false
 language: node_js
 node_js:
@@ -8,3 +23,16 @@ install:
   - sh -e /etc/init.d/xvfb start
   - npm i -g jshint
   - npm install
+  - npm install -g gulp
+script:
+  - rm -rf dist
+  - git clone --quiet -b gh-pages "https://${GH_TOKEN}@${GH_REF}" gh > /dev/null 2>&1
+  - gulp
+  - mkdir -p gh/${TRAVIS_BRANCH}
+  - cp -a dist/* gh/${TRAVIS_BRANCH}/
+  - cd gh
+  - git config user.name "Michael Ira Krufky via Travis CI"
+  - git config user.email "mkrufky@linuxtv.org"
+  - git add ${TRAVIS_BRANCH}
+  - git commit -m "Deploy to GitHub Pages based on ${TRAVIS_COMMIT} on branch ${TRAVIS_BRANCH}"
+  - git push --quiet "https://${GH_TOKEN}@${GH_REF}" gh-pages > /dev/null 2>&1
