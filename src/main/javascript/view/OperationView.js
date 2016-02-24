@@ -350,6 +350,18 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       if (isFileUpload) {
         return this.handleFileUpload(map, form);
       } else {
+        var mockOpts = {mock: true};
+        var opt, obj;
+
+        for (opt in opts) {
+          mockOpts[opt] = opts[opt];
+        }
+
+        obj = this.model['do'](map, mockOpts);
+        this.showHeaderParams(obj.headers);
+
+        this.showCurlCommand(this.model.asCurl(map, mockOpts));
+
         return this.model['do'](map, opts, this.showCompleteStatus, this.showErrorStatus, this);
       }
     }
@@ -431,6 +443,8 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       })(this),
       complete: (function (_this) {
         return function (data) {
+          _this.showHeaderParams(headerParams);
+          _this.showCurlCommand(null);
           return _this.showCompleteStatus(_this.wrap(data), _this);
         };
       })(this)
@@ -501,6 +515,27 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
   showCompleteStatus: function (data, parent) {
     $('#modal-' + parent.parentId + '_' + parent.nickname).modal();
     parent.showStatus(data);
+  },
+
+  // show the curl command
+  showCurlCommand: function (curl) {
+    if (!curl) {
+      $('.curl_command, .curl_prompt', $(this.el)).hide();
+    } else {
+      $('.curl_command', $(this.el)).html('<pre></pre>');
+      $('.curl_command pre', $(this.el)).text(curl);
+      $('.curl_command, .curl_prompt', $(this.el)).show();
+    }
+  },
+
+  // show the header params
+  showHeaderParams: function (headerParams) {
+    if ($.isEmptyObject(headerParams)) {
+      $('.request_headers, .request_headers_prompt', $(this.el)).hide();
+    } else {
+      $('.request_headers', $(this.el)).html('<pre>' + _.escape(JSON.stringify(headerParams, null, '  ')).replace(/\n/g, '<br>') + '</pre>');
+      $('.request_headers, .request_headers_prompt', $(this.el)).show();
+    }
   },
 
   // Adapted from http://stackoverflow.com/a/2893259/454004
