@@ -329,7 +329,11 @@ SwaggerUi.Views.OperationView = Backbone.View.extend({
       for (m = 0, len1 = ref2.length; m < len1; m++) {
         o = ref2[m];
         if ((o.value !== null) && jQuery.trim(o.value).length > 0) {
-          map[o.name] = o.value;
+          if (o.className && (o.className.includes('array-parameter'))) {
+            map[o.name] = o.value.split(/\n/);
+          } else {
+            map[o.name] = o.value;
+          }
         }
       }
       ref3 = form.find('select');
