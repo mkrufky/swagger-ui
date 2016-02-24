@@ -5,8 +5,13 @@ $(function () {
   else
     url = swaggerSpec;
 
+  var apiKey = '';
+  if (typeof defaultApiKey !== 'undefined')
+    apiKey = defaultApiKey;
+
   window.swaggerUi = new SwaggerUi({
     url: url,
+    apiKey: apiKey,
     dom_id: "swagger-ui-container",
     supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
     onComplete: function (swaggerApi, swaggerUi) {
@@ -23,7 +28,6 @@ $(function () {
 
       $("[data-toggle='tooltip']").tooltip();
 
-      $('#input_apiKey').val('rqpsx1FEknLqmzq2SzvS');
       addApiKeyAuthorization();
     },
     onFailure: function (data) {
