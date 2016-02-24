@@ -17414,3 +17414,18 @@ li.L9 {
         display: none;
     }
 }
+/* Overrides for content management*/
+li {
+    margin: 0px 0 !important;
+}
+.nav > li {
+    font-family: 'lucida grande',tahoma,verdana,arial,sans-serif;
+}
+.container {
+    width: 100% !important;
+}
+.modal-dialog {
+    position: static !important;
+    width: auto !important;
+    max-width: 1000px !important;
+}
