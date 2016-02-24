@@ -236,6 +236,11 @@
     margin-right: 5px
 }
 
+.swagger-section .parameter-item .small-description .parameter-location {
+    display: inline-table;
+    font-style: italic;
+}
+
 .swagger-section .parameter-item .small-description .markdown {
     display: inline-table;
 }
