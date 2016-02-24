@@ -1,3 +1,6 @@
+.swagger-section {
+    overflow-y: auto !important;
+}
 .swagger-section pre code {
     display: block;
     padding: .5em
