@@ -106,7 +106,7 @@
     }
 }
 
-.swagger-section h2.operation-title {
+.swagger-section h2.operation-title, .swagger-section h2.resource_name {
     display: block;
     float: none;
     color: #333;
@@ -118,7 +118,7 @@
 }
 
 @media (min-width: 992px) {
-    .swagger-section h2.operation-title {
+    .swagger-section h2.operation-title, .swagger-section h2.resource_name {
         font-size: 32px;
         font-weight: 200;
         line-height: 1;
@@ -127,7 +127,7 @@
 }
 
 @media (min-width: 1400px) {
-    .swagger-section h2.operation-title {
+    .swagger-section h2.operation-title, .swagger-section h2.resource_name {
         padding-right: 0;
     }
 }
@@ -1969,6 +1969,25 @@ body {
 .swagger-section .swagger-ui-wrap ul#resources {
     font-family: proxima-nova, sans-serif;
     font-size: .9em
+}
+
+.swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header h2.resource_name {
+    padding: 0 20px;
+}
+
+@media (min-width: 992px) {
+    .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header {
+        padding: 0 20px;
+    }
+
+    .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header .resource_description {
+        width: 50%;
+    }
+}
+.swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header .resource_description {
+    padding: 0 20px;
+    margin: 0;
+    color: #838991
 }
 
 .swagger-section .swagger-ui-wrap ul#resources li.resource.active div.heading h2 a, .swagger-section .swagger-ui-wrap ul#resources li.resource:hover div.heading h2 a {
