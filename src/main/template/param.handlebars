@@ -29,15 +29,15 @@
             </label>
             <div class="parameter-content-type"/>
         {{else}}
-            {{#if default}}
-                <input class='parameter form-control' minlength='0' name='{{name}}' placeholder='' type='{{inputType}}' value='{{default}}'  data-toggle="tooltip" data-placement="right" title="" data-original-title='{{name}}'/>
+            {{#if isArray}}
+                <textarea class='parameter form-control array-parameter' minlength='0' name='{{name}}' placeholder='' type='{{inputType}}' data-toggle="tooltip" data-placement="right" title="" data-original-title='{{name}}'>{{default}}</textarea>
             {{else}}
-                <input class='parameter form-control' minlength='0' name='{{name}}' placeholder='' type='{{inputType}}' value=''  data-toggle="tooltip" data-placement="right" title="" data-original-title='{{name}}'/>
+                <input class='parameter form-control' minlength='0' name='{{name}}' placeholder='' type='{{inputType}}' value='{{default}}' data-toggle="tooltip" data-placement="right" title="" data-original-title='{{name}}'/>
             {{/if}}
         {{/if}}
         <div class="small-description">
             {{#if type}}
-                <code class="code-signature">{{type}}</code>
+                <code class="code-signature">{{type}}{{#isArray this}}, one per line{{/isArray}}</code>
             {{/if}}
             <div class="markdown">{{description}}</div>
         </div>
