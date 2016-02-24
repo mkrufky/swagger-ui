@@ -1,5 +1,9 @@
 $(function () {
-  var url = "/output.json";
+  var url;
+  if (typeof swaggerSpec === 'undefined')
+    url = '/output.json';
+  else
+    url = swaggerSpec;
 
   window.swaggerUi = new SwaggerUi({
     url: url,
