@@ -117,7 +117,8 @@
     font-size: 25px;
     line-height: 1.3;
     font-weight: 400;
-    margin: 20px 0
+    margin: 0;
+    margin-bottom: 20px;
 }
 
 @media (min-width: 992px) {
@@ -1981,6 +1982,7 @@ body {
 
 .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header h2.resource_name {
     padding: 0 20px;
+    padding-top: 20px;
 }
 
 @media (min-width: 992px) {
