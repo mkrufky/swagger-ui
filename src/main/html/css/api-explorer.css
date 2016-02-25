@@ -617,7 +617,6 @@
         max-height: none;
         min-width: 100%;
         width: 100%;
-        margin-bottom: 30px;
         border-bottom: 1px solid #e8eaeb
     }
 }
@@ -1113,6 +1112,7 @@
     position: absolute;
     top: 43px;
     width: 100%;
+    margin-top: 30px;
     z-index: 500
 }
 
