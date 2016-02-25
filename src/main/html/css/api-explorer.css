@@ -1383,12 +1383,6 @@
     font-size: 13px
 }
 
-@media (min-width: 992px) {
-    .changes-disclaimer {
-        display: block
-    }
-}
-
 .site-header .container {
     max-width: none !important;
     width: 100%
