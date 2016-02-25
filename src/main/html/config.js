@@ -9,9 +9,14 @@ $(function () {
   if (typeof defaultApiKey !== 'undefined')
     apiKey = defaultApiKey;
 
+  var removeApiInput = false;
+  if (typeof disableApiKey !== 'undefined')
+    removeApiInput = disableApiKey;
+
   window.swaggerUi = new SwaggerUi({
     url: url,
     apiKey: apiKey,
+    removeApiInput: removeApiInput,
     dom_id: "swagger-ui-container",
     supportedSubmitMethods: ['get', 'post', 'put', 'delete', 'patch'],
     onComplete: function (swaggerApi, swaggerUi) {
@@ -28,7 +33,12 @@ $(function () {
 
       $("[data-toggle='tooltip']").tooltip();
 
-      addApiKeyAuthorization();
+      if (swaggerUi.options.removeApiInput) {
+        $('.token-generator').remove();
+      } else {
+        $('#input_apiKey').change(addApiKeyAuthorization);
+        addApiKeyAuthorization();
+      }
     },
     onFailure: function (data) {
       log("Unable to Load SwaggerUI");
@@ -46,7 +56,6 @@ $(function () {
       log("added key " + key);
     }
   }
-  $('#input_apiKey').change(addApiKeyAuthorization);
   window.swaggerUi.load();
 
   function log() {
