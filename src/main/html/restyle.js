@@ -4,17 +4,7 @@ $(document).ready(function() {
 
   var targetContainerClass = '.model-signature .description';
 
-  var waitUntilModelSignatureElementsExist = (function() {
-    setTimeout(function() {
-      var $modelSignatureElements = $(targetContainerClass);
-
-      if ($modelSignatureElements.length == 0) {
-        waitUntilModelSignatureElementsExist();
-      } else {
-        runScript();
-      }
-    }, 100);
-  })();
+  waitUntilModelSignatureElementsExist();
 
   /* Main */
 
@@ -110,4 +100,16 @@ $(document).ready(function() {
   function escapeHTML(text) {
     return text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   }
+
+  function waitUntilModelSignatureElementsExist() {
+    setTimeout(function() {
+      var $modelSignatureElements = $(targetContainerClass);
+
+      if ($modelSignatureElements.length == 0) {
+        waitUntilModelSignatureElementsExist();
+      } else {
+        runScript();
+      }
+    }, 100);
+  };
 });
