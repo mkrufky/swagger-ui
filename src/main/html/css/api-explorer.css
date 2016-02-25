@@ -1981,15 +1981,11 @@ body {
 }
 
 .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header h2.resource_name {
-    padding: 0 20px;
-    padding-top: 20px;
+    padding: 20px 20px 0 20px;
+    border-top: 1px solid rgba(0, 0, 0, .08);
 }
 
 @media (min-width: 992px) {
-    .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header {
-        padding: 0 20px;
-    }
-
     .swagger-section .swagger-ui-wrap ul#resources li.resource .resource_header .resource_description {
         width: 50%;
     }
